@@ -1,0 +1,2 @@
+tool_name,uri
+lftp-client,docker://dockito/lftp-client

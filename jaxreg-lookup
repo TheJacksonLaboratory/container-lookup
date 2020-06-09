@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+QUERY="$1"
+[[ "$2" == "-q" ]] && QUIET=1 || QUIET=0
+set -euo pipefail
+CURR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CSV_FILE="${CURR_DIR}/externals.csv"
+if [[ -z "$QUERY" ]]; then
+    exit 1
+fi
+if [[ "$QUERY" == "-l" || "$QUERY" == "--list" ]]; then
+    cat $CSV_FILE | tr ',' '\t'
+elif [[ "$QUERY" == "-h" || "$QUERY" == "--help" ]]; then
+    echo "Usage: $0 [-opts] query"
+    echo -e "\t-h/--help: this message"
+    echo -e "\t-l/--list: list all external resources"
+    echo -e "\t-q: don't output anything upon no match"
+else
+    RESULT=$(grep -i -- "$QUERY" $CSV_FILE || echo "")
+    if [[ ! -z "$RESULT" ]]; then
+        echo "$RESULT" | cut -d, -f2
+        exit 0
+    else
+        if [[ $QUIET -eq 0 ]]; then
+            echo "No external resources matching query: [$QUERY]"
+        fi
+        exit 0
+    fi
+fi
