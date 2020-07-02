@@ -1,4 +1,4 @@
 tool_name,uri
 lftp-client,docker://dockito/lftp-client
 ascp,docker://ibmcom/aspera-cli
-aspera,docker://ibmcom/aspera-cli
+vep,docker://ensemblorg/ensembl-vep
