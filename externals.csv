@@ -2,4 +2,4 @@ tool_name,uri
 lftp-client,docker://dockito/lftp-client
 ascp,docker://ibmcom/aspera-cli
 vep,docker://ensemblorg/ensembl-vep
-refgenie,docker://nsheff/refgenie
+refgenie,docker://databio/refgenie
